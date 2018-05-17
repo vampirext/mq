@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\picasso-2.5.2_3ff36468137ad07d8521ea72ea2f0a9063f8936f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.0.0\e414a4cb28434e25c4f6aa71426eb20cf4874ae9\common-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\common-1.0.0_782ff68c87fa947f038e2c811d09ddb5365b855a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-26.1.0_3dd414a4d350ba987bb1e4175044976c79835f51.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-26.1.0_d9fa8a847173a58392629c3f6b01c9be3a0d678a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.taobao.android\weexplugin-processor\1.3\90f4c5cdb14a255dd3cc341b563271494e8cd941\weexplugin-processor-1.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="90f4c5cdb14a255dd3cc341b563271494e8cd941">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\weexplugin-processor-1.3_4dc3fa8ad907011d77d59e4f87a8f2fad27a1660.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.3.0\2e7bc7033dc2c8423e661224171b3133fb155b28\okhttp-2.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="2e7bc7033dc2c8423e661224171b3133fb155b28">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\okhttp-2.3.0_104664923c454477a2905ecf5cf7cfa7a5875438.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.journeyapps\zxing-android-embedded\3.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="0e1f104cf60bfe34147ef670229f2635789c79a4">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.journeyapps-zxing-android-embedded-3.4.0_8ca05e78038b78e304406b011a32cceda8a56baa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\support-compat\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-26.1.0_c0ba3d6ddeb18733bd285f963cb4a081964636cc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\transition\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-transition-26.1.0_92872eac92de9bb1ddbbb5f3532d482aae68eb31.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\26.1.0\814258103cf26a15fcc26ecce35f5b7d24b73f8\support-annotations-26.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\support-annotations-26.1.0_0c76944bb78bcf53deb22d6270c807a2898ab722.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-26.1.0_1bf9a400c75ebb3307d791af01cad171ed2f62bb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\jsr305-2.0.1_6bfa7a0ccf89415ce1945f75aa207f16b42c5343.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="508f50705b4fde51a16259f29c854201a3044516">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-26.1.0_2e30d5277dfb7bfb5d3e46be883a59b985d3cc08.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\support-fragment\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-26.1.0_88ee54647bbffda211ae60d945cd5af51c404e4b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.alibaba\fastjson\1.1.46.android\108717c93f7aec31fb86db57cb4ad1e26034c638\fastjson-1.1.46.android.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="108717c93f7aec31fb86db57cb4ad1e26034c638">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\fastjson-1.1.46.android_75b7b8bdf7f3382b08c55c12e3e5e2de6c2596f0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.taobao.android\weexplugin-annotation\1.3\f9c594cafe95ab01986863300b2f2993b5777b42\weexplugin-annotation-1.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="f9c594cafe95ab01986863300b2f2993b5777b42">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\weexplugin-annotation-1.3_9af8495c1afe04efb403569105a6ff6f437955c6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.3.0\1b355f73402020c5a0dcca58affc3ec3dfeabac1\okio-1.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="1b355f73402020c5a0dcca58affc3ec3dfeabac1">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\okio-1.3.0_4cfa1062da7b801271ad0cb89c159d49926cdd19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\android.arch.lifecycle\runtime\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\android.arch.lifecycle-runtime-1.0.0_a3a86a3b314c55c7f370fc3e95a680672609da35.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\design\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-design-26.1.0_679aa6edab9a143e76729f1c61f46414dbf392bf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="b12cd9c87c3dfb012a911b6e38d2444ed0a65e1f">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-26.1.0_e59dde18446ee8ec46a4f7dbe9b2eafcabea8a50.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.taobao.android\weex_inspector\0.10.0.5\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="575d72d4a489260763ca62b2b54450fdec3bebd1">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.taobao.android-weex_inspector-0.10.0.5_140e0a612e3a511c06d98ace87094ffd987de692.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-26.1.0_fbc0d0399ca2d803df1fef7812e9cbb8029460c2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.taobao.android\weexplugin-loader\1.3\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="c85f46e9eed1cccfd0bf5df199dd53a66de98651">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.taobao.android-weexplugin-loader-1.3_df69b8be91b6ad11767f8c75f7c4e06cbcd621e6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.google.zxing\core\3.2.1\2287494d4f5f9f3a9a2bb6980e3f32053721b315\core-3.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\core-3.2.1_2ed9c7d6ec8a5c96d60dee74a80f19d8438618d5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.taobao.android\weex_sdk\0.16.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="9cfcc5fc657d64c980b45db00cd75695d1ce2256">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.taobao.android-weex_sdk-0.16.0_0ab2d1e9a9eafb76b43b097dccf09fb9d0a60ef2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.0.0\a2d487452376193fc8c103dd2b9bd5f2b1b44563\common-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\common-1.0.0_c15cba297bf2c40b96b4dd3339665fb5fc16e32e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Vampire\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp-ws\2.3.0\7896d229b6aa7884552ab9c23de54c7eb0de8203\okhttp-ws-2.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="7896d229b6aa7884552ab9c23de54c7eb0de8203">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\okhttp-ws-2.3.0_9d5cb1520b5a033abaa3b7a4f974d2e60f3563de.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-26.1.0_6e11c3fc30c12ca63e23ed97228d124bf1632ccf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\AndroidProject\mq\platforms\android\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\26.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
+        <dex dex="D:\AndroidProject\mq\platforms\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-26.1.0_131d94b8742177f659efaa71539e95335dd25f27.jar" />
+    </item>
+
+</items>
