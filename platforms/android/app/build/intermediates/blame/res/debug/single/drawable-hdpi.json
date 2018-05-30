@@ -1,10 +1,50 @@
 [
     {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\me2.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\me2.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\appointment1.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\appointment1.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\case2.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\case2.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\plus.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\plus.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\appointment2.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\appointment2.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\me1.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\me1.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\tooth2.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\tooth2.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\case1.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\case1.png"
+    },
+    {
         "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_action_refresh.png",
         "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\ic_action_refresh.png"
     },
     {
         "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_action_scan.png",
         "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\ic_action_scan.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\tooth1.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\tooth1.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\shadow3.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-hdpi\\shadow3.png"
     }
 ]

@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -284,103 +284,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8418,684 +8321,117 @@ if (inBrowser) {
 
 /* harmony default export */ __webpack_exports__["default"] = (Vue);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1), __webpack_require__(0), __webpack_require__(8).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1), __webpack_require__(0), __webpack_require__(5).setImmediate))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// this module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(18)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
-                                                                                                                                                                                                                                                                                * CopyRight (C) 2017-2022 Alibaba Group Holding Limited.
-                                                                                                                                                                                                                                                                                * Created by Tw93 on 17/11/01
-                                                                                                                                                                                                                                                                                */
-
-var _urlParse = __webpack_require__(20);
-
-var _urlParse2 = _interopRequireDefault(_urlParse);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var Utils = {
-  UrlParser: _urlParse2.default,
-  _typeof: function _typeof(obj) {
-    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
-  },
-  isPlainObject: function isPlainObject(obj) {
-    return Utils._typeof(obj) === 'object';
-  },
-  isString: function isString(obj) {
-    return typeof obj === 'string';
-  },
-  isNonEmptyArray: function isNonEmptyArray() {
-    var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-    return obj && obj.length > 0 && Array.isArray(obj) && typeof obj !== 'undefined';
-  },
-  isObject: function isObject(item) {
-    return item && (typeof item === 'undefined' ? 'undefined' : _typeof2(item)) === 'object' && !Array.isArray(item);
-  },
-  isEmptyObject: function isEmptyObject(obj) {
-    return Object.keys(obj).length === 0 && obj.constructor === Object;
-  },
-  decodeIconFont: function decodeIconFont(text) {
-    // 正则匹配 图标和文字混排 eg: 我去上学校&#xe600;,天天不&#xe600;迟到
-    var regExp = /&#x[a-z|0-9]{4,5};?/g;
-    if (regExp.test(text)) {
-      return text.replace(new RegExp(regExp, 'g'), function (iconText) {
-        var replace = iconText.replace(/&#x/, '0x').replace(/;$/, '');
-        return String.fromCharCode(replace);
-      });
-    } else {
-      return text;
-    }
-  },
-  mergeDeep: function mergeDeep(target) {
-    for (var _len = arguments.length, sources = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      sources[_key - 1] = arguments[_key];
-    }
-
-    if (!sources.length) return target;
-    var source = sources.shift();
-    if (Utils.isObject(target) && Utils.isObject(source)) {
-      for (var key in source) {
-        if (Utils.isObject(source[key])) {
-          if (!target[key]) {
-            Object.assign(target, _defineProperty({}, key, {}));
-          }
-          Utils.mergeDeep(target[key], source[key]);
-        } else {
-          Object.assign(target, _defineProperty({}, key, source[key]));
-        }
-      }
-    }
-    return Utils.mergeDeep.apply(Utils, [target].concat(sources));
-  },
-  appendProtocol: function appendProtocol(url) {
-    if (/^\/\//.test(url)) {
-      var bundleUrl = weex.config.bundleUrl;
-
-      return 'http' + (/^https:/.test(bundleUrl) ? 's' : '') + ':' + url;
-    }
-    return url;
-  },
-  encodeURLParams: function encodeURLParams(url) {
-    var parsedUrl = new _urlParse2.default(url, true);
-    return parsedUrl.toString();
-  },
-  goToH5Page: function goToH5Page(jumpUrl) {
-    var animated = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-    var Navigator = weex.requireModule('navigator');
-    var jumpUrlObj = new Utils.UrlParser(jumpUrl, true);
-    var url = Utils.appendProtocol(jumpUrlObj.toString());
-    Navigator.push({
-      url: Utils.encodeURLParams(url),
-      animated: animated.toString()
-    }, callback);
-  },
-
-  env: {
-    isTaobao: function isTaobao() {
-      var appName = weex.config.env.appName;
-
-      return (/(tb|taobao|淘宝)/i.test(appName)
-      );
-    },
-    isTrip: function isTrip() {
-      var appName = weex.config.env.appName;
-
-      return appName === 'LX';
-    },
-    isBoat: function isBoat() {
-      var appName = weex.config.env.appName;
-
-      return appName === 'Boat' || appName === 'BoatPlayground';
-    },
-    isWeb: function isWeb() {
-      var platform = weex.config.env.platform;
-
-      return (typeof window === 'undefined' ? 'undefined' : _typeof2(window)) === 'object' && platform.toLowerCase() === 'web';
-    },
-    isIOS: function isIOS() {
-      var platform = weex.config.env.platform;
-
-      return platform.toLowerCase() === 'ios';
-    },
-
-    /**
-     * 是否为 iPhone X
-     * @returns {boolean}
-     */
-    isIPhoneX: function isIPhoneX() {
-      var deviceHeight = weex.config.env.deviceHeight;
-
-      if (Utils.env.isWeb()) {
-        return (typeof window === 'undefined' ? 'undefined' : _typeof2(window)) !== undefined && window.screen && window.screen.width && window.screen.height && parseInt(window.screen.width, 10) === 375 && parseInt(window.screen.height, 10) === 812;
-      }
-      return Utils.env.isIOS() && deviceHeight === 2436;
-    },
-    isAndroid: function isAndroid() {
-      var platform = weex.config.env.platform;
-
-      return platform.toLowerCase() === 'android';
-    },
-    isAlipay: function isAlipay() {
-      var appName = weex.config.env.appName;
-
-      return appName === 'AP';
-    },
-    isTmall: function isTmall() {
-      var appName = weex.config.env.appName;
-
-      return (/(tm|tmall|天猫)/i.test(appName)
-      );
-    },
-    isAliWeex: function isAliWeex() {
-      return Utils.env.isTmall() || Utils.env.isTrip() || Utils.env.isTaobao();
-    },
-
-    /**
-     * 获取weex屏幕真实的设置高度，需要减去导航栏高度
-     * @returns {Number}
-     */
-    getPageHeight: function getPageHeight() {
-      var env = weex.config.env;
-
-      var navHeight = Utils.env.isWeb() ? 0 : Utils.env.isIPhoneX() ? 176 : 132;
-      return env.deviceHeight / env.deviceWidth * 750 - navHeight;
-    },
-
-    /**
-     * 获取weex屏幕真实的设置高度
-     * @returns {Number}
-     */
-    getScreenHeight: function getScreenHeight() {
-      var env = weex.config.env;
-
-      return env.deviceHeight / env.deviceWidth * 750;
-    }
-  },
-
-  /**
-   * 版本号比较
-   * @memberOf Utils
-   * @param currVer {string}
-   * @param promoteVer {string}
-   * @returns {boolean}
-   * @example
-   *
-   * const { Utils } = require('@ali/wx-bridge');
-   * const { compareVersion } = Utils;
-   * console.log(compareVersion('0.1.100', '0.1.11')); // 'true'
-   */
-  compareVersion: function compareVersion() {
-    var currVer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '0.0.0';
-    var promoteVer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '0.0.0';
-
-    if (currVer === promoteVer) return true;
-    var currVerArr = currVer.split('.');
-    var promoteVerArr = promoteVer.split('.');
-    var len = Math.max(currVerArr.length, promoteVerArr.length);
-    for (var i = 0; i < len; i++) {
-      var proVal = ~~promoteVerArr[i];
-      var curVal = ~~currVerArr[i];
-      if (proVal < curVal) {
-        return true;
-      } else if (proVal > curVal) {
-        return false;
-      }
-    }
-    return false;
-  },
-
-  /**
-   * 分割数组
-   * @param arr 被分割数组
-   * @param size 分割数组的长度
-   * @returns {Array}
-   */
-  arrayChunk: function arrayChunk() {
-    var arr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4;
-
-    var groups = [];
-    if (arr && arr.length > 0) {
-      groups = arr.map(function (e, i) {
-        return i % size === 0 ? arr.slice(i, i + size) : null;
-      }).filter(function (e) {
-        return e;
-      });
-    }
-    return groups;
-  },
-
-  /*
-   * 截断字符串
-   * @param str 传入字符串
-   * @param len 截断长度
-   * @param hasDot 末尾是否...
-   * @returns {String}
-   */
-  truncateString: function truncateString(str, len) {
-    var hasDot = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-    var newLength = 0;
-    var newStr = '';
-    var singleChar = '';
-    var chineseRegex = /[^\x00-\xff]/g;
-    var strLength = str.replace(chineseRegex, '**').length;
-    for (var i = 0; i < strLength; i++) {
-      singleChar = str.charAt(i).toString();
-      if (singleChar.match(chineseRegex) !== null) {
-        newLength += 2;
-      } else {
-        newLength++;
-      }
-      if (newLength > len) {
-        break;
-      }
-      newStr += singleChar;
-    }
-
-    if (hasDot && strLength > len) {
-      newStr += '...';
-    }
-    return newStr;
-  },
-
-  /*
-   * 转换 obj 为 url params参数
-   * @param obj 传入字符串
-   * @returns {String}
-   */
-  objToParams: function objToParams(obj) {
-    var str = "";
-    for (var key in obj) {
-      if (str !== "") {
-        str += "&";
-      }
-      str += key + "=" + encodeURIComponent(obj[key]);
-    }
-    return str;
-  },
-
-  /*
-   * 转换 url params参数为obj
-   * @param str 传入url参数字符串
-   * @returns {Object}
-   */
-  paramsToObj: function paramsToObj(str) {
-    var obj = {};
-    try {
-      obj = JSON.parse('{"' + decodeURI(str).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
-    } catch (e) {
-      console.log(e);
-    }
-    return obj;
-  },
-
-  animation: {
-    /**
-     * 返回定义页面转场动画起初的位置
-     * @param ref
-     * @param transform 运动类型
-     * @param status
-     * @param callback 回调函数
-     */
-    pageTransitionAnimation: function pageTransitionAnimation(ref, transform, status, callback) {
-      var animation = weex.requireModule('animation');
-      animation.transition(ref, {
-        styles: {
-          transform: transform
-        },
-        duration: status ? 250 : 300, // ms
-        timingFunction: status ? 'ease-in' : 'ease-out',
-        delay: 0 // ms
-      }, function () {
-        callback && callback();
-      });
-    }
-  },
-  uiStyle: {
-    /**
-     * 返回定义页面转场动画起初的位置
-     * @param animationType 页面转场动画的类型 push，model
-     * @param size 分割数组的长度
-     * @returns {}
-     */
-    pageTransitionAnimationStyle: function pageTransitionAnimationStyle(animationType) {
-      if (animationType === 'push') {
-        return {
-          left: '750px',
-          top: '0px',
-          height: weex.config.env.deviceHeight / weex.config.env.deviceWidth * 750 + 'px'
-        };
-      } else if (animationType === 'model') {
-        return {
-          top: weex.config.env.deviceHeight / weex.config.env.deviceWidth * 750 + 'px',
-          left: '0px',
-          height: weex.config.env.deviceHeight / weex.config.env.deviceWidth * 750 + 'px'
-        };
-      }
-      return {};
-    }
-  }
-};
-
-exports.default = Utils;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _vue = __webpack_require__(3);
+var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _weexVueRender = __webpack_require__(10);
+var _weexVueRender = __webpack_require__(7);
 
 var _weexVueRender2 = _interopRequireDefault(_weexVueRender);
 
@@ -9105,14 +8441,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _weexVueRender2.default.init(_vue2.default);
 /* weex initialized here, please do not move this line */
-var router = __webpack_require__(11);
-var App = __webpack_require__(15);
+var router = __webpack_require__(8);
+var App = __webpack_require__(12);
 /* eslint-disable no-new */
 new _vue2.default(_vue2.default.util.extend({ el: '#root', router: router }, App));
 router.push('/');
 
 /***/ }),
-/* 8 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -9168,7 +8504,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(9);
+__webpack_require__(6);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -9182,7 +8518,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 9 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -9375,7 +8711,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0), __webpack_require__(1)))
 
 /***/ }),
-/* 10 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19975,21 +19311,21 @@ console.log('START WEEX VUE RENDER: 1.0.24, Build 2018-04-24 21:27.');
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 11 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _vue = __webpack_require__(3);
+var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vueRouter = __webpack_require__(12);
+var _vueRouter = __webpack_require__(9);
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-var _HelloWorld = __webpack_require__(13);
+var _HelloWorld = __webpack_require__(10);
 
 var _HelloWorld2 = _interopRequireDefault(_HelloWorld);
 
@@ -20007,7 +19343,7 @@ module.exports = new _vueRouter2.default({
 });
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22639,15 +21975,15 @@ if (inBrowser && window.Vue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
   null,
   /* template */
-  __webpack_require__(14),
+  __webpack_require__(11),
   /* styles */
   null,
   /* scopeId */
@@ -22679,7 +22015,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 14 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -22699,23 +22035,23 @@ if (false) {
 }
 
 /***/ }),
-/* 15 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(16)
+  __webpack_require__(13)
 }
-var Component = __webpack_require__(2)(
+var Component = __webpack_require__(3)(
   /* script */
-  __webpack_require__(19),
+  __webpack_require__(18),
   /* template */
-  __webpack_require__(30),
+  __webpack_require__(19),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-6acadaca",
+  null,
   /* moduleIdentifier (server only) */
   null
 )
@@ -22743,23 +22079,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 16 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(17);
+var content = __webpack_require__(14);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(5)("a91dc51c", content, false, {});
+var update = __webpack_require__(16)("1922917b", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6acadaca\",\"scoped\":true,\"hasInlineConfig\":true}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6acadaca\",\"scoped\":true,\"hasInlineConfig\":true}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6acadaca\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6acadaca\",\"scoped\":false,\"hasInlineConfig\":true}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -22769,21 +22105,331 @@ if(false) {
 }
 
 /***/ }),
-/* 17 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(4)(false);
+exports = module.exports = __webpack_require__(15)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.item-container[data-v-6acadaca] {\n  width: 10rem;\n  background-color: #f2f3f4;\n  align-items: center;\n  justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.tab-bar{\n  width:10rem;\n  height:1.33333rem;\n  position:absolute;\n  bottom:0;\n  padding-top:10;\n  /* background-color: gray; */\n}\n.tab-img-0{\n  width:10rem;\n  height:1.33333rem;\n  position:absolute;\n  left:0;\n  bottom:0;\n}\n.tab-icon-1{\n  font-size:0.53333rem;\n  font-family:iconfont;\n  position:absolute;\n  left:0.73333rem;\n  bottom:0.32rem;\n}\n.tab-icon-2{\n  font-size:0.53333rem;\n  font-family:iconfont;\n  position:absolute;\n  left:2.73333rem;\n  bottom:0.32rem;\n}\n.tab-img-3{\n  width:2rem;\n  height:0.8rem;\n  position:absolute;\n  left:4rem;\n}\n.tab-icon-4{\n  font-size:0.53333rem;\n  font-family:iconfont;\n  position:absolute;\n  left:6.73333rem;\n  bottom:0.32rem;\n}\n.tab-icon-5{\n  font-size:0.53333rem;\n  font-family:iconfont;\n  position:absolute;\n  left:8.73333rem;\n  bottom:0.32rem;\n}\n.tab-text-1{\n  font-size:0.32rem;\n  position:absolute;\n  left:0.66667rem;\n  color:#8a8a8a;\n  bottom:0;\n}\n.active{\n  color:#1296db;\n}\n.tab-text-2{\n  font-size:0.32rem;\n  position:absolute;\n  left:2.66667rem;\n  color:#8a8a8a;\n  bottom:0;\n}\n.tab-text-4{\n  font-size:0.32rem;\n  position:absolute;\n  left:6.66667rem;\n  color:#8a8a8a;\n  bottom:0;\n}\n.tab-text-5{\n  font-size:0.32rem;\n  position:absolute;\n  left:8.66667rem;\n  color:#8a8a8a;\n  bottom:0;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 18 */
+/* 15 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(17)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports) {
 
 /**
@@ -22816,1283 +22462,334 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+//export default与module.exports属于不同的两种语法规范，同时使用冲突
+//   export default{
+//     data(){
+//       return{
+//         active:false
+//       }
+//     },
+//     methods:{
+//       page1(){
+//         this.active=true
+//       }
+//     }
+//   }
+//   module.exports = {
+//         beforeCreate() {
+//         var domModule = weex.requireModule('dom');
+//         //目前支持ttf、woff文件，不支持svg、eot类型,moreItem at http://www.iconfont.cn/
+//         domModule.addRule('fontFace', {
+//             'fontFamily': "iconfont",
+//             'src': "url('http://at.alicdn.com/t/font_668071_4x4nzm1ahkr442t9.ttf')"
+//         });
+//     }
+// }
+var modal = weex.requireModule('modal');
+var domModule = weex.requireModule('dom');
+exports.default = {
+  data: function data() {
+    return {
+      active1: false,
+      active2: false,
+      active3: false,
+      active4: false
+    };
+  },
+  created: function created() {
+    modal.toast({ message: "1111" });
+    domModule.addRule('fontFace', {
+      'fontFamily': "iconfont",
+      'src': "url('http://at.alicdn.com/t/font_668071_4x4nzm1ahkr442t9.ttf')"
+    });
+  },
+
+  methods: {
+    page1: function page1() {
+      this.active1 = true;
+      this.active2 = false;
+      this.active3 = false;
+      this.active4 = false;
+    },
+    page2: function page2() {
+      this.active1 = false;
+      this.active2 = true;
+      this.active3 = false;
+      this.active4 = false;
+    },
+    page3: function page3() {
+      this.active1 = false;
+      this.active2 = false;
+      this.active3 = true;
+      this.active4 = false;
+    },
+    page4: function page4() {
+      this.active1 = false;
+      this.active2 = false;
+      this.active3 = false;
+      this.active4 = true;
+    }
+  }
+};
+
+/***/ }),
 /* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _utils = __webpack_require__(6);
-
-var _utils2 = _interopRequireDefault(_utils);
-
-var _wxcTabBar = __webpack_require__(23);
-
-var _wxcTabBar2 = _interopRequireDefault(_wxcTabBar);
-
-var _config = __webpack_require__(29);
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  components: { WxcTabBar: _wxcTabBar2.default },
-  data: function data() {
-    return {
-      tabTitles: _config2.default.tabIconFontTitles,
-      tabStyles: _config2.default.tabIconFontStyles
-    };
-  },
-  created: function created() {
-    var tabPageHeight = _utils2.default.env.getPageHeight();
-    // 如果页面没有导航栏，可以用下面这个计算高度的方法
-    // const tabPageHeight = env.deviceHeight / env.deviceWidth * 750;
-    var tabStyles = this.tabStyles;
-
-    this.contentStyle = { height: tabPageHeight - tabStyles.height + 'px' };
-  },
-
-  methods: {
-    wxcTabBarCurrentTabSelected: function wxcTabBarCurrentTabSelected(e) {
-      var index = e.page;
-      // console.log(index);
-    }
-  }
-};
-
-// https://github.com/alibaba/weex-ui/blob/master/example/tab-bar/config.js
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-
-var required = __webpack_require__(21)
-  , qs = __webpack_require__(22)
-  , protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i
-  , slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//;
-
-/**
- * These are the parse rules for the URL parser, it informs the parser
- * about:
- *
- * 0. The char it Needs to parse, if it's a string it should be done using
- *    indexOf, RegExp using exec and NaN means set as current value.
- * 1. The property we should set when parsing this value.
- * 2. Indication if it's backwards or forward parsing, when set as number it's
- *    the value of extra chars that should be split off.
- * 3. Inherit from location if non existing in the parser.
- * 4. `toLowerCase` the resulting value.
- */
-var rules = [
-  ['#', 'hash'],                        // Extract from the back.
-  ['?', 'query'],                       // Extract from the back.
-  ['/', 'pathname'],                    // Extract from the back.
-  ['@', 'auth', 1],                     // Extract from the front.
-  [NaN, 'host', undefined, 1, 1],       // Set left over value.
-  [/:(\d+)$/, 'port', undefined, 1],    // RegExp the back.
-  [NaN, 'hostname', undefined, 1, 1]    // Set left over.
-];
-
-/**
- * These properties should not be copied or inherited from. This is only needed
- * for all non blob URL's as a blob URL does not include a hash, only the
- * origin.
- *
- * @type {Object}
- * @private
- */
-var ignore = { hash: 1, query: 1 };
-
-/**
- * The location object differs when your code is loaded through a normal page,
- * Worker or through a worker using a blob. And with the blobble begins the
- * trouble as the location object will contain the URL of the blob, not the
- * location of the page where our code is loaded in. The actual origin is
- * encoded in the `pathname` so we can thankfully generate a good "default"
- * location from it so we can generate proper relative URL's again.
- *
- * @param {Object|String} loc Optional default location object.
- * @returns {Object} lolcation object.
- * @api public
- */
-function lolcation(loc) {
-  loc = loc || global.location || {};
-
-  var finaldestination = {}
-    , type = typeof loc
-    , key;
-
-  if ('blob:' === loc.protocol) {
-    finaldestination = new URL(unescape(loc.pathname), {});
-  } else if ('string' === type) {
-    finaldestination = new URL(loc, {});
-    for (key in ignore) delete finaldestination[key];
-  } else if ('object' === type) {
-    for (key in loc) {
-      if (key in ignore) continue;
-      finaldestination[key] = loc[key];
-    }
-
-    if (finaldestination.slashes === undefined) {
-      finaldestination.slashes = slashes.test(loc.href);
-    }
-  }
-
-  return finaldestination;
-}
-
-/**
- * @typedef ProtocolExtract
- * @type Object
- * @property {String} protocol Protocol matched in the URL, in lowercase.
- * @property {Boolean} slashes `true` if protocol is followed by "//", else `false`.
- * @property {String} rest Rest of the URL that is not part of the protocol.
- */
-
-/**
- * Extract protocol information from a URL with/without double slash ("//").
- *
- * @param {String} address URL we want to extract from.
- * @return {ProtocolExtract} Extracted information.
- * @api private
- */
-function extractProtocol(address) {
-  var match = protocolre.exec(address);
-
-  return {
-    protocol: match[1] ? match[1].toLowerCase() : '',
-    slashes: !!match[2],
-    rest: match[3]
-  };
-}
-
-/**
- * Resolve a relative URL pathname against a base URL pathname.
- *
- * @param {String} relative Pathname of the relative URL.
- * @param {String} base Pathname of the base URL.
- * @return {String} Resolved pathname.
- * @api private
- */
-function resolve(relative, base) {
-  var path = (base || '/').split('/').slice(0, -1).concat(relative.split('/'))
-    , i = path.length
-    , last = path[i - 1]
-    , unshift = false
-    , up = 0;
-
-  while (i--) {
-    if (path[i] === '.') {
-      path.splice(i, 1);
-    } else if (path[i] === '..') {
-      path.splice(i, 1);
-      up++;
-    } else if (up) {
-      if (i === 0) unshift = true;
-      path.splice(i, 1);
-      up--;
-    }
-  }
-
-  if (unshift) path.unshift('');
-  if (last === '.' || last === '..') path.push('');
-
-  return path.join('/');
-}
-
-/**
- * The actual URL instance. Instead of returning an object we've opted-in to
- * create an actual constructor as it's much more memory efficient and
- * faster and it pleases my OCD.
- *
- * @constructor
- * @param {String} address URL we want to parse.
- * @param {Object|String} location Location defaults for relative paths.
- * @param {Boolean|Function} parser Parser for the query string.
- * @api public
- */
-function URL(address, location, parser) {
-  if (!(this instanceof URL)) {
-    return new URL(address, location, parser);
-  }
-
-  var relative, extracted, parse, instruction, index, key
-    , instructions = rules.slice()
-    , type = typeof location
-    , url = this
-    , i = 0;
-
-  //
-  // The following if statements allows this module two have compatibility with
-  // 2 different API:
-  //
-  // 1. Node.js's `url.parse` api which accepts a URL, boolean as arguments
-  //    where the boolean indicates that the query string should also be parsed.
-  //
-  // 2. The `URL` interface of the browser which accepts a URL, object as
-  //    arguments. The supplied object will be used as default values / fall-back
-  //    for relative paths.
-  //
-  if ('object' !== type && 'string' !== type) {
-    parser = location;
-    location = null;
-  }
-
-  if (parser && 'function' !== typeof parser) parser = qs.parse;
-
-  location = lolcation(location);
-
-  //
-  // Extract protocol information before running the instructions.
-  //
-  extracted = extractProtocol(address || '');
-  relative = !extracted.protocol && !extracted.slashes;
-  url.slashes = extracted.slashes || relative && location.slashes;
-  url.protocol = extracted.protocol || location.protocol || '';
-  address = extracted.rest;
-
-  //
-  // When the authority component is absent the URL starts with a path
-  // component.
-  //
-  if (!extracted.slashes) instructions[2] = [/(.*)/, 'pathname'];
-
-  for (; i < instructions.length; i++) {
-    instruction = instructions[i];
-    parse = instruction[0];
-    key = instruction[1];
-
-    if (parse !== parse) {
-      url[key] = address;
-    } else if ('string' === typeof parse) {
-      if (~(index = address.indexOf(parse))) {
-        if ('number' === typeof instruction[2]) {
-          url[key] = address.slice(0, index);
-          address = address.slice(index + instruction[2]);
-        } else {
-          url[key] = address.slice(index);
-          address = address.slice(0, index);
-        }
-      }
-    } else if ((index = parse.exec(address))) {
-      url[key] = index[1];
-      address = address.slice(0, index.index);
-    }
-
-    url[key] = url[key] || (
-      relative && instruction[3] ? location[key] || '' : ''
-    );
-
-    //
-    // Hostname, host and protocol should be lowercased so they can be used to
-    // create a proper `origin`.
-    //
-    if (instruction[4]) url[key] = url[key].toLowerCase();
-  }
-
-  //
-  // Also parse the supplied query string in to an object. If we're supplied
-  // with a custom parser as function use that instead of the default build-in
-  // parser.
-  //
-  if (parser) url.query = parser(url.query);
-
-  //
-  // If the URL is relative, resolve the pathname against the base URL.
-  //
-  if (
-      relative
-    && location.slashes
-    && url.pathname.charAt(0) !== '/'
-    && (url.pathname !== '' || location.pathname !== '')
-  ) {
-    url.pathname = resolve(url.pathname, location.pathname);
-  }
-
-  //
-  // We should not add port numbers if they are already the default port number
-  // for a given protocol. As the host also contains the port number we're going
-  // override it with the hostname which contains no port number.
-  //
-  if (!required(url.port, url.protocol)) {
-    url.host = url.hostname;
-    url.port = '';
-  }
-
-  //
-  // Parse down the `auth` for the username and password.
-  //
-  url.username = url.password = '';
-  if (url.auth) {
-    instruction = url.auth.split(':');
-    url.username = instruction[0] || '';
-    url.password = instruction[1] || '';
-  }
-
-  url.origin = url.protocol && url.host && url.protocol !== 'file:'
-    ? url.protocol +'//'+ url.host
-    : 'null';
-
-  //
-  // The href is just the compiled result.
-  //
-  url.href = url.toString();
-}
-
-/**
- * This is convenience method for changing properties in the URL instance to
- * insure that they all propagate correctly.
- *
- * @param {String} part          Property we need to adjust.
- * @param {Mixed} value          The newly assigned value.
- * @param {Boolean|Function} fn  When setting the query, it will be the function
- *                               used to parse the query.
- *                               When setting the protocol, double slash will be
- *                               removed from the final url if it is true.
- * @returns {URL}
- * @api public
- */
-function set(part, value, fn) {
-  var url = this;
-
-  switch (part) {
-    case 'query':
-      if ('string' === typeof value && value.length) {
-        value = (fn || qs.parse)(value);
-      }
-
-      url[part] = value;
-      break;
-
-    case 'port':
-      url[part] = value;
-
-      if (!required(value, url.protocol)) {
-        url.host = url.hostname;
-        url[part] = '';
-      } else if (value) {
-        url.host = url.hostname +':'+ value;
-      }
-
-      break;
-
-    case 'hostname':
-      url[part] = value;
-
-      if (url.port) value += ':'+ url.port;
-      url.host = value;
-      break;
-
-    case 'host':
-      url[part] = value;
-
-      if (/:\d+$/.test(value)) {
-        value = value.split(':');
-        url.port = value.pop();
-        url.hostname = value.join(':');
-      } else {
-        url.hostname = value;
-        url.port = '';
-      }
-
-      break;
-
-    case 'protocol':
-      url.protocol = value.toLowerCase();
-      url.slashes = !fn;
-      break;
-
-    case 'pathname':
-    case 'hash':
-      if (value) {
-        var char = part === 'pathname' ? '/' : '#';
-        url[part] = value.charAt(0) !== char ? char + value : value;
-      } else {
-        url[part] = value;
-      }
-      break;
-
-    default:
-      url[part] = value;
-  }
-
-  for (var i = 0; i < rules.length; i++) {
-    var ins = rules[i];
-
-    if (ins[4]) url[ins[1]] = url[ins[1]].toLowerCase();
-  }
-
-  url.origin = url.protocol && url.host && url.protocol !== 'file:'
-    ? url.protocol +'//'+ url.host
-    : 'null';
-
-  url.href = url.toString();
-
-  return url;
-}
-
-/**
- * Transform the properties back in to a valid and full URL string.
- *
- * @param {Function} stringify Optional query stringify function.
- * @returns {String}
- * @api public
- */
-function toString(stringify) {
-  if (!stringify || 'function' !== typeof stringify) stringify = qs.stringify;
-
-  var query
-    , url = this
-    , protocol = url.protocol;
-
-  if (protocol && protocol.charAt(protocol.length - 1) !== ':') protocol += ':';
-
-  var result = protocol + (url.slashes ? '//' : '');
-
-  if (url.username) {
-    result += url.username;
-    if (url.password) result += ':'+ url.password;
-    result += '@';
-  }
-
-  result += url.host + url.pathname;
-
-  query = 'object' === typeof url.query ? stringify(url.query) : url.query;
-  if (query) result += '?' !== query.charAt(0) ? '?'+ query : query;
-
-  if (url.hash) result += url.hash;
-
-  return result;
-}
-
-URL.prototype = { set: set, toString: toString };
-
-//
-// Expose the URL parser and some additional properties that might be useful for
-// others or testing.
-//
-URL.extractProtocol = extractProtocol;
-URL.location = lolcation;
-URL.qs = qs;
-
-module.exports = URL;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Check if we're required to add a port number.
- *
- * @see https://url.spec.whatwg.org/#default-port
- * @param {Number|String} port Port number we need to check
- * @param {String} protocol Protocol we need to check against.
- * @returns {Boolean} Is it a default port for the given protocol
- * @api private
- */
-module.exports = function required(port, protocol) {
-  protocol = protocol.split(':')[0];
-  port = +port;
-
-  if (!port) return false;
-
-  switch (protocol) {
-    case 'http':
-    case 'ws':
-    return port !== 80;
-
-    case 'https':
-    case 'wss':
-    return port !== 443;
-
-    case 'ftp':
-    return port !== 21;
-
-    case 'gopher':
-    return port !== 70;
-
-    case 'file':
-    return false;
-  }
-
-  return port !== 0;
-};
-
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var has = Object.prototype.hasOwnProperty;
-
-/**
- * Decode a URI encoded string.
- *
- * @param {String} input The URI encoded string.
- * @returns {String} The decoded string.
- * @api private
- */
-function decode(input) {
-  return decodeURIComponent(input.replace(/\+/g, ' '));
-}
-
-/**
- * Simple query string parser.
- *
- * @param {String} query The query string that needs to be parsed.
- * @returns {Object}
- * @api public
- */
-function querystring(query) {
-  var parser = /([^=?&]+)=?([^&]*)/g
-    , result = {}
-    , part;
-
-  while (part = parser.exec(query)) {
-    var key = decode(part[1])
-      , value = decode(part[2]);
-
-    //
-    // Prevent overriding of existing properties. This ensures that build-in
-    // methods like `toString` or __proto__ are not overriden by malicious
-    // querystrings.
-    //
-    if (key in result) continue;
-    result[key] = value;
-  }
-
-  return result;
-}
-
-/**
- * Transform a query string to an object.
- *
- * @param {Object} obj Object that should be transformed.
- * @param {String} prefix Optional prefix.
- * @returns {String}
- * @api public
- */
-function querystringify(obj, prefix) {
-  prefix = prefix || '';
-
-  var pairs = [];
-
-  //
-  // Optionally prefix with a '?' if needed
-  //
-  if ('string' !== typeof prefix) prefix = '?';
-
-  for (var key in obj) {
-    if (has.call(obj, key)) {
-      pairs.push(encodeURIComponent(key) +'='+ encodeURIComponent(obj[key]));
-    }
-  }
-
-  return pairs.length ? prefix + pairs.join('&') : '';
-}
-
-//
-// Expose the module.
-//
-exports.stringify = querystringify;
-exports.parse = querystring;
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _index = __webpack_require__(24);
-
-Object.defineProperty(exports, 'default', {
-  enumerable: true,
-  get: function get() {
-    return _interopRequireDefault(_index).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(25)
-}
-var Component = __webpack_require__(2)(
-  /* script */
-  __webpack_require__(27),
-  /* template */
-  __webpack_require__(28),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  "data-v-16edebb0",
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "D:\\AndroidProject\\mq\\node_modules\\weex-ui\\packages\\wxc-tab-bar\\index.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-16edebb0", Component.options)
-  } else {
-    hotAPI.reload("data-v-16edebb0", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(26);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(5)("57ea76bf", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-16edebb0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../css-loader/index.js!../../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-16edebb0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.wxc-tab-page[data-v-16edebb0] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n.tab-title-list[data-v-16edebb0] {\n  flex-direction: row;\n  justify-content: space-around;\n}\n.title-item[data-v-16edebb0] {\n  justify-content: center;\n  align-items: center;\n  border-bottom-style: solid;\n}\n.tab-page-wrap[data-v-16edebb0] {\n  width: 10rem;\n  flex: 1;\n  overflow: hidden;\n}\n.tab-container[data-v-16edebb0] {\n  flex: 1;\n  flex-direction: row;\n  position: absolute;\n}\n.tab-text[data-v-16edebb0] {\n  lines: 1;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-line-clamp: 1;\n}\n.desc-tag[data-v-16edebb0] {\n  position: absolute;\n  top: 0.13333rem;\n  right: 0.26667rem;\n  border-bottom-right-radius: 0.18667rem;\n  border-bottom-left-radius: 0;\n  border-top-left-radius: 0.18667rem;\n  border-top-right-radius: 0.18667rem;\n  background-color: #FF5E00;\n  height: 0.34667rem;\n  align-items: center;\n  justify-content: center;\n  padding-left: 0.08rem;\n  padding-right: 0.08rem;\n}\n.dot[data-v-16edebb0] {\n  width: 0.16rem;\n  height: 0.16rem;\n  border-bottom-right-radius: 0.16rem;\n  border-bottom-left-radius: 0.16rem;\n  border-top-left-radius: 0.16rem;\n  border-top-right-radius: 0.16rem;\n  position: absolute;\n  top: 0.13333rem;\n  right: 0.53333rem;\n  background-color: #FF5E00;\n}\n.desc-text[data-v-16edebb0] {\n  font-size: 0.24rem;\n  color: #ffffff;\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _utils = __webpack_require__(6);
-
-var _utils2 = _interopRequireDefault(_utils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var dom = weex.requireModule('dom');
-var animation = weex.requireModule('animation');
-exports.default = {
-  props: {
-    tabTitles: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    tabStyles: {
-      type: Object,
-      default: function _default() {
-        return {
-          bgColor: '#FFFFFF',
-          titleColor: '#666666',
-          activeTitleColor: '#3D3D3D',
-          activeBgColor: '#FFFFFF',
-          isActiveTitleBold: true,
-          iconWidth: 70,
-          iconHeight: 70,
-          width: 160,
-          height: 120,
-          fontSize: 24,
-          activeBottomColor: '#FFC900',
-          activeBottomWidth: 120,
-          activeBottomHeight: 6,
-          textPaddingLeft: 10,
-          textPaddingRight: 10
-        };
-      }
-    },
-    titleType: {
-      type: String,
-      default: 'icon'
-    },
-    titleUseSlot: {
-      type: Boolean,
-      default: false
-    },
-    isTabView: {
-      type: Boolean,
-      default: true
-    },
-    duration: {
-      type: [Number, String],
-      default: 300
-    },
-    timingFunction: {
-      type: String,
-      default: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-    },
-    wrapBgColor: {
-      type: String,
-      default: '#f2f3f4'
-    }
-  },
-  data: function data() {
-    return {
-      currentPage: 0,
-      translateX: 0
-    };
-  },
-  created: function created() {
-    var titleType = this.titleType,
-        tabStyles = this.tabStyles;
-
-    if (titleType === 'iconFont' && tabStyles.iconFontUrl) {
-      dom.addRule('fontFace', {
-        'fontFamily': "wxcIconFont",
-        'src': 'url(\'' + tabStyles.iconFontUrl + '\')'
-      });
-    }
-    this.isIPhoneX = _utils2.default.env.isIPhoneX();
-  },
-
-  methods: {
-    next: function next() {
-      var page = this.currentPage;
-      if (page < this.tabTitles.length - 1) {
-        page++;
-      }
-      this.setPage(page);
-    },
-    prev: function prev() {
-      var page = this.currentPage;
-      if (page > 0) {
-        page--;
-      }
-      this.setPage(page);
-    },
-    setPage: function setPage(page) {
-      var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var animated = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-      if (!this.isTabView) {
-        this.jumpOut(url);
-        return;
-      }
-      var previousPage = this.currentPage;
-      var currentTabEl = this.$refs['wxc-tab-title-' + page][0];
-      var width = this.tabStyles.width;
-
-      var appearNum = parseInt(750 / width);
-      var tabsNum = this.tabTitles.length;
-      var offset = page > appearNum ? -(750 - width) / 2 : -width * 2;
-
-      if (appearNum < tabsNum) {
-        (previousPage > appearNum || page > 1) && dom.scrollToElement(currentTabEl, {
-          offset: offset, animated: animated
-        });
-
-        page <= 1 && previousPage > page && dom.scrollToElement(currentTabEl, {
-          offset: -width * page,
-          animated: animated
-        });
-      }
-
-      this.currentPage = page;
-      this._animateTransformX(page, animated);
-      this.$emit('wxcTabBarCurrentTabSelected', { page: page });
-    },
-    jumpOut: function jumpOut(url) {
-      url && _utils2.default.goToH5Page(url);
-    },
-    _animateTransformX: function _animateTransformX(page, animated) {
-      var duration = this.duration,
-          timingFunction = this.timingFunction;
-
-      var computedDur = animated ? duration : 0.00001;
-      var containerEl = this.$refs['tab-container'];
-      var dist = page * 750;
-      animation.transition(containerEl, {
-        styles: {
-          transform: 'translateX(' + -dist + 'px)'
-        },
-        duration: computedDur,
-        timingFunction: timingFunction,
-        delay: 0
-      }, function () {});
-    }
-  }
-};
-
-/***/ }),
-/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "wxc-tab-page weex-ct weex-div",
-    style: ({
-      backgroundColor: _vm.wrapBgColor
-    }),
+    staticClass: " weex-ct weex-div",
     attrs: {
       "weex-type": "div"
     }
   }, [_c('div', {
-    ref: "tab-page-wrap",
-    staticClass: "tab-page-wrap weex-ct weex-div",
+    staticClass: "tab-bar weex-ct weex-div",
     attrs: {
+      "font": "",
       "weex-type": "div"
     }
-  }, [_c('div', {
-    ref: "tab-container",
-    staticClass: "tab-container weex-ct weex-div",
+  }, [_c('figure', {
+    staticClass: "tab-img-0 weex-el weex-image",
     attrs: {
-      "weex-type": "div"
+      "src": "local:///shadow3",
+      "data-img-src": "local:///shadow3",
+      "weex-type": "image"
     }
-  }, [_vm._t("default", null, {})], 2)]), _vm._v(" "), _c('div', {
-    staticClass: "tab-title-list weex-ct weex-div",
-    style: ({
-      backgroundColor: _vm.tabStyles.bgColor,
-      height: _vm._px2rem(_vm.tabStyles.height + (_vm.isIPhoneX ? 78 : 0) + 'px', 75),
-      paddingBottom: _vm._px2rem(_vm.isIPhoneX ? '78px' : '0', 75)
-    }),
+  }), _vm._v(" "), _c('p', {
+    staticClass: " weex-el weex-text",
+    class: ['tab-icon-1', _vm.active1 ? 'active' : ''],
     attrs: {
-      "weex-type": "div"
-    }
-  }, _vm._l((_vm.tabTitles), function(v, index) {
-    return _c('div', {
-      key: index,
-      ref: 'wxc-tab-title-' + index,
-      refInFor: true,
-      staticClass: "title-item weex-ct weex-div",
-      style: ({
-        width: _vm._px2rem(_vm.tabStyles.width + 'px', 75),
-        height: _vm._px2rem(_vm.tabStyles.height + 'px', 75),
-        backgroundColor: _vm.currentPage == index ? _vm.tabStyles.activeBgColor : _vm.tabStyles.bgColor
-      }),
-      attrs: {
-        "accessible": true,
-        "aria-label": ("" + (v.title?v.title:'标签'+index)),
-        "weex-type": "div",
-        "data-evt-click": ""
-      },
-      on: {
-        "click": _vm.$stopOuterA,
-        "weex$tap": function($event) {
-          $event.stopPropagation();
-          _vm.setPage(index, v.url)
-        }
-      }
-    }, [(_vm.titleType === 'icon' && !_vm.titleUseSlot) ? _c('figure', {
-      staticClass: " weex-el weex-image",
-      style: ({
-        width: _vm._px2rem(_vm.tabStyles.iconWidth + 'px', 75),
-        height: _vm._px2rem(_vm.tabStyles.iconHeight + 'px', 75)
-      }),
-      attrs: {
-        "src": _vm.currentPage == index ? v.activeIcon : v.icon,
-        "data-img-src": _vm.currentPage == index ? v.activeIcon : v.icon,
-        "weex-type": "image"
-      }
-    }) : _vm._e(), _vm._v(" "), (_vm.titleType === 'iconFont' && v.codePoint && !_vm.titleUseSlot) ? _c('p', {
-      staticClass: " weex-el weex-text",
-      style: ({
-        fontFamily: 'wxcIconFont',
-        fontSize: _vm._px2rem(_vm.tabStyles.iconFontSize + 'px', 75),
-        marginBottom: _vm._px2rem(_vm.tabStyles.iconFontMarginBottom ? _vm.tabStyles.iconFontMarginBottom + 'px' : '8px', 75),
-        color: _vm.currentPage == index ? _vm.tabStyles.activeIconFontColor : _vm.tabStyles.iconFontColor
-      }),
-      attrs: {
-        "weex-type": "text"
-      }
-    }, [_vm._v(_vm._s(v.codePoint))]) : _vm._e(), _vm._v(" "), (!_vm.titleUseSlot) ? _c('p', {
-      staticClass: "tab-text weex-el weex-text",
-      style: ({
-        fontSize: _vm._px2rem(_vm.tabStyles.fontSize + 'px', 75),
-        fontWeight: _vm.currentPage == index && _vm.tabStyles.isActiveTitleBold ? 'bold' : 'normal',
-        color: _vm.currentPage == index ? _vm.tabStyles.activeTitleColor : _vm.tabStyles.titleColor,
-        paddingLeft: _vm._px2rem(_vm.tabStyles.textPaddingLeft + 'px', 75),
-        paddingRight: _vm._px2rem(_vm.tabStyles.textPaddingRight + 'px', 75)
-      }),
-      attrs: {
-        "weex-type": "text"
-      }
-    }, [_vm._v(_vm._s(v.title))]) : _vm._e(), _vm._v(" "), (v.badge && !_vm.titleUseSlot) ? _c('div', {
-      staticClass: "desc-tag weex-ct weex-div",
-      attrs: {
-        "weex-type": "div"
-      }
-    }, [_c('p', {
-      staticClass: "desc-text weex-el weex-text",
-      attrs: {
-        "weex-type": "text"
-      }
-    }, [_vm._v(_vm._s(v.badge))])]) : _vm._e(), _vm._v(" "), (v.dot && !v.badge && !_vm.titleUseSlot) ? _c('div', {
-      staticClass: "dot weex-ct weex-div",
-      attrs: {
-        "weex-type": "div"
-      }
-    }) : _vm._e(), _vm._v(" "), (_vm.titleUseSlot) ? _vm._t(("tab-title-" + index), null, {}) : _vm._e()], 2)
-  }))])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-16edebb0", module.exports)
-  }
-}
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {
-
-  // 正常模式的tab title配置
-  tabTitles: [{
-    title: '日记',
-    icon: '../configs/tooth1.png',
-    activeIcon: '../configs/tooth2.png'
-  }, {
-    title: '预约',
-    icon: '../configs/appointment1.png',
-    activeIcon: '../configs/appointment2.png'
-  }, {
-    title: '案例',
-    icon: '../configs/case1.png',
-    activeIcon: '../configs/case2.png'
-    //badge: 5
-  }, {
-    title: '我的',
-    icon: '../configs/me1.png',
-    activeIcon: '../configs/me2.png'
-    //dot: true
-  }],
-  tabStyles: {
-    bgColor: '#FFFFFF',
-    titleColor: '#666666',
-    activeTitleColor: '#3D3D3D',
-    activeBgColor: '#FFFFFF',
-    isActiveTitleBold: true,
-    iconWidth: 70,
-    iconHeight: 70,
-    width: 160,
-    height: 120,
-    fontSize: 24,
-    textPaddingLeft: 10,
-    textPaddingRight: 10
-  },
-
-  // 使用 iconFont 模式的tab title配置
-  tabIconFontTitles: [{
-    title: '日记',
-    codePoint: '\uE667'
-  }, {
-    title: '预约',
-    codePoint: '\uE6E1'
-  }, {
-    title: '案例',
-    codePoint: '\uE6E0'
-    //badge: 5
-  }, {
-    title: '我的',
-    codePoint: '\uE6E2'
-    //dot: true
-  }],
-  tabIconFontStyles: {
-    bgColor: '#FFFFFF',
-    titleColor: '#666666',
-    activeTitleColor: '#3D3D3D',
-    activeBgColor: '#FFFFFF',
-    isActiveTitleBold: true,
-    width: 160,
-    height: 120,
-    fontSize: 24,
-    textPaddingLeft: 10,
-    textPaddingRight: 10,
-    iconFontSize: 50,
-    iconFontMarginBottom: 8,
-    iconFontColor: '#333333',
-    activeIconFontColor: 'blue',
-    //iconFontUrl: '//at.alicdn.com/t/font_668071_lxmigpq0965el8fr.ttf'
-    /**
-     * 1.Android或者iOS 访问本地图片或者字体,在weex中统一以' local://'为前缀
-     * 2.'/'在android下如果加载的是字体对应的就是assets目录,若果加载的图片就从
-     *    drawable 目录, 所以iconfont.ttf放置在src/assets目录下的话,字体的url
-     *    加载方式应该为('local:///iconfont.ttf')
-     */
-    iconFontUrl: 'local:///navigation.ttf'
-  }
-};
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('wxc-tab-bar', {
-    attrs: {
-      "tab-titles": _vm.tabTitles,
-      "tab-styles": _vm.tabStyles,
-      "title-type": "iconFont",
-      "data-evt-wxcTabBarCurrentTabSelected": ""
+      "weex-type": "text",
+      "data-evt-click": ""
     },
     on: {
-      "wxcTabBarCurrentTabSelected": _vm.wxcTabBarCurrentTabSelected
+      "click": _vm.$stopOuterA,
+      "weex$tap": function($event) {
+        $event.stopPropagation();
+        return _vm.page1($event)
+      }
     }
-  }, [_c('div', {
-    staticClass: "item-container weex-ct weex-div",
-    style: (_vm._px2rem(_vm.contentStyle, 75)),
-    attrs: {
-      "weex-type": "div"
-    }
-  }, [_c('p', {
+  }, [_vm._v("")]), _vm._v(" "), _c('p', {
     staticClass: " weex-el weex-text",
+    class: ['tab-text-1', _vm.active1 ? 'active' : ''],
     attrs: {
-      "weex-type": "text"
+      "weex-type": "text",
+      "data-evt-click": ""
+    },
+    on: {
+      "click": _vm.$stopOuterA,
+      "weex$tap": function($event) {
+        $event.stopPropagation();
+        return _vm.page1($event)
+      }
     }
-  }, [_vm._v("日记")])]), _vm._v(" "), _c('div', {
-    staticClass: "item-container weex-ct weex-div",
-    style: (_vm._px2rem(_vm.contentStyle, 75)),
-    attrs: {
-      "weex-type": "div"
-    }
-  }, [_c('p', {
+  }, [_vm._v("日记")]), _vm._v(" "), _c('p', {
     staticClass: " weex-el weex-text",
+    class: ['tab-icon-2', _vm.active2 ? 'active' : ''],
     attrs: {
-      "weex-type": "text"
+      "weex-type": "text",
+      "data-evt-click": ""
+    },
+    on: {
+      "click": _vm.$stopOuterA,
+      "weex$tap": function($event) {
+        $event.stopPropagation();
+        return _vm.page2($event)
+      }
     }
-  }, [_vm._v("预约")])]), _vm._v(" "), _c('div', {
-    staticClass: "item-container weex-ct weex-div",
-    style: (_vm._px2rem(_vm.contentStyle, 75)),
-    attrs: {
-      "weex-type": "div"
-    }
-  }, [_c('p', {
+  }, [_vm._v("")]), _vm._v(" "), _c('p', {
     staticClass: " weex-el weex-text",
+    class: ['tab-text-2', _vm.active2 ? 'active' : ''],
     attrs: {
-      "weex-type": "text"
+      "weex-type": "text",
+      "data-evt-click": ""
+    },
+    on: {
+      "click": _vm.$stopOuterA,
+      "weex$tap": function($event) {
+        $event.stopPropagation();
+        return _vm.page2($event)
+      }
     }
-  }, [_vm._v("案例")])]), _vm._v(" "), _c('div', {
-    staticClass: "item-container weex-ct weex-div",
-    style: (_vm._px2rem(_vm.contentStyle, 75)),
+  }, [_vm._v("预约")]), _vm._v(" "), _c('figure', {
+    directives: [{
+      name: "weex-resize",
+      rawName: "v-weex-resize",
+      value: ("contain"),
+      expression: "\"contain\""
+    }],
+    staticClass: "tab-img-3 weex-el weex-image",
     attrs: {
-      "weex-type": "div"
+      "src": "local:///plus",
+      "resize": "contain",
+      "data-img-src": "local:///plus",
+      "weex-type": "image"
     }
-  }, [_c('p', {
+  }), _vm._v(" "), _c('p', {
     staticClass: " weex-el weex-text",
+    class: ['tab-icon-4', _vm.active3 ? 'active' : ''],
     attrs: {
-      "weex-type": "text"
+      "weex-type": "text",
+      "data-evt-click": ""
+    },
+    on: {
+      "click": _vm.$stopOuterA,
+      "weex$tap": function($event) {
+        $event.stopPropagation();
+        return _vm.page3($event)
+      }
+    }
+  }, [_vm._v("")]), _vm._v(" "), _c('p', {
+    staticClass: " weex-el weex-text",
+    class: ['tab-text-4', _vm.active3 ? 'active' : ''],
+    attrs: {
+      "weex-type": "text",
+      "data-evt-click": ""
+    },
+    on: {
+      "click": _vm.$stopOuterA,
+      "weex$tap": function($event) {
+        $event.stopPropagation();
+        return _vm.page3($event)
+      }
+    }
+  }, [_vm._v("案例")]), _vm._v(" "), _c('p', {
+    staticClass: " weex-el weex-text",
+    class: ['tab-icon-5', _vm.active4 ? 'active' : ''],
+    attrs: {
+      "weex-type": "text",
+      "data-evt-click": ""
+    },
+    on: {
+      "click": _vm.$stopOuterA,
+      "weex$tap": function($event) {
+        $event.stopPropagation();
+        return _vm.page4($event)
+      }
+    }
+  }, [_vm._v("")]), _vm._v(" "), _c('p', {
+    staticClass: " weex-el weex-text",
+    class: ['tab-text-5', _vm.active4 ? 'active' : ''],
+    attrs: {
+      "weex-type": "text",
+      "data-evt-click": ""
+    },
+    on: {
+      "click": _vm.$stopOuterA,
+      "weex$tap": function($event) {
+        $event.stopPropagation();
+        return _vm.page4($event)
+      }
     }
   }, [_vm._v("我的")])])])
 },staticRenderFns: []}

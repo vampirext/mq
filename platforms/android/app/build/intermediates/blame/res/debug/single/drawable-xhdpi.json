@@ -6,5 +6,45 @@
     {
         "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_action_scan.png",
         "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\ic_action_scan.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\me2.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\me2.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\plus.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\plus.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\tooth2.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\tooth2.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\appointment2.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\appointment2.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\case2.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\case2.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\case1.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\case1.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\appointment1.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\appointment1.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\shadow3.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\shadow3.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\me1.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\me1.png"
+    },
+    {
+        "merged": "D:\\AndroidProject\\mq\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\tooth1.png",
+        "source": "D:\\AndroidProject\\mq\\platforms\\android\\app\\src\\main\\res\\drawable-xhdpi\\tooth1.png"
     }
 ]
